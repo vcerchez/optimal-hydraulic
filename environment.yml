@@ -8,6 +8,7 @@ dependencies:
   - mypy=1.10.*
   - pandas=2.2.*
   - matplotlib-base=3.8.*
+  - scikit-learn=1.4.*
 
 ####### USAGE #########
 # Install env with:
