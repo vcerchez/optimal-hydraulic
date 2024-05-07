@@ -4,9 +4,10 @@ channels:
   - conda-forge
 dependencies:
   - python=3.11.*
-  - ipython=8.22.*
+  - ipykernel=6.29.*
   - mypy=1.10.*
   - pandas=2.2.*
+  - matplotlib-base=3.8.*
 
 ####### USAGE #########
 # Install env with:
