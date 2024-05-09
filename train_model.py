@@ -53,5 +53,14 @@ scores = cross_validate(
 
 scores = pd.DataFrame(scores)[['train_score', 'test_score']]
 
+# Raise error if the performance of the model is below of the threshold
+class ModelPerformanceError(Exception):
+    def __init__(self, metric, achieved_value, perf_threshold):
+        super().__init__(f"Model performance on '{metric}' ({achieved_value}) fell below the threshold ({perf_threshold})")
+
+perf_threshold = 0.95
+if (scores.mean() < perf_threshold).any():
+    raise ModelPerformanceError('accuracy', scores.mean().min(), perf_threshold)
+
 # Train the model
 clf = LogisticRegression(random_state=0, max_iter=300).fit(X, y)
