@@ -4,6 +4,8 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_validate
+import joblib
+
 
 # Read raw data
 # Target variable
@@ -64,3 +66,8 @@ if (scores.mean() < perf_threshold).any():
 
 # Train the model
 clf = LogisticRegression(random_state=0, max_iter=300).fit(X, y)
+
+# Save trained model
+# TODO: replace joblib by skops (https://scikit-learn.org/stable/model_persistence.html#a-more-secure-format-skops)
+joblib.dump(clf, 'model.joblib')
+
