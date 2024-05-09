@@ -6,8 +6,10 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_validate
 import joblib
 
+# Load and preprocess data
+# TODO: add logger
+print('Loading and preprocessing data')
 
-# Read raw data
 # Target variable
 target_col_idx = 1
 y_raw = pd.read_csv(
@@ -43,6 +45,7 @@ def reduce_time_resolution(df, stride):
 X = reduce_time_resolution(X, stride=500)
 
 # Train and evaluate LR model
+print('Training model')
 # TODO: CV hyperparameter tuning
 scores = cross_validate(
     LogisticRegression(random_state=0, max_iter=300), 
@@ -68,6 +71,8 @@ if (scores.mean() < perf_threshold).any():
 clf = LogisticRegression(random_state=0, max_iter=300).fit(X, y)
 
 # Save trained model
+print('Saving model')
 # TODO: replace joblib by skops (https://scikit-learn.org/stable/model_persistence.html#a-more-secure-format-skops)
 joblib.dump(clf, 'model.joblib')
 
+print('Done')
