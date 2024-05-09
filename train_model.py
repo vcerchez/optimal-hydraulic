@@ -8,6 +8,7 @@ import joblib
 
 # Load and preprocess data
 # TODO: add logger
+# TODO: create sklearn pipeline with all preprocessing included in it
 print('Loading and preprocessing data')
 
 # Target variable
@@ -74,5 +75,10 @@ clf = LogisticRegression(random_state=0, max_iter=300).fit(X, y)
 print('Saving model')
 # TODO: replace joblib by skops (https://scikit-learn.org/stable/model_persistence.html#a-more-secure-format-skops)
 joblib.dump(clf, 'model.joblib')
+
+# Save preprocessed data
+print('Saving preprocessed data')
+y.to_csv('data/y.csv', index=False)
+X.to_csv('data/X.csv', index=False)
 
 print('Done')
