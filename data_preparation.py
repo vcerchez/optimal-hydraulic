@@ -15,8 +15,8 @@ y_raw = pd.read_csv(
 y = (y_raw - 99).clip(lower=0)
 
 # Explanatory variables
-FS1 = pd.read_csv('data/FS1.txt', sep='\t', names=range(1, 601), dtype=float)
-PS2 = pd.read_csv('data/PS2.txt', sep='\t',  names=range(1, 6001),dtype=float)
+FS1 = pd.read_csv('data/FS1.txt', sep='\t', names=[str(i) + '_FS1' for i in range(1, 601)], dtype=float)
+PS2 = pd.read_csv('data/PS2.txt', sep='\t',  names=[str(i) + '_PS2' for i in range(1, 6001)],dtype=float)
 
 # Save preprocessed data
 y.to_csv('data/y.csv', index=False)
