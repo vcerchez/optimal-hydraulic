@@ -10,6 +10,8 @@ dependencies:
   - matplotlib-base=3.8.*
   - seaborn-base=0.13.*
   - scikit-learn=1.4.*
+  - fastapi=0.111.*
+  - uvicorn=0.29.*
 
 ####### USAGE #########
 # Install env with:
