@@ -1,14 +1,16 @@
 # Pipeline for the model training, evaluation and pickle
 
 import pandas as pd
+from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_validate
 import joblib
 
+from data_transformation import extract_PS2, reduce_time_resolution
+
 # Load and preprocess data
 # TODO: add logger
-# TODO: create sklearn pipeline with all preprocessing included in it
 print('Loading and preprocessing data')
 
 # Target variable
@@ -25,31 +27,25 @@ y = (y_raw - 99).clip(lower=0)
 
 # Explanatory variables
 # We ignore FS1, perfect model can be trained with PS2 only.
-X = pd.read_csv('data/PS2.txt', sep='\t', names=[str(i) + '_PS2' for i in range(1, 6001)], dtype=float)
+FS1 = pd.read_csv('data/FS1.txt', sep='\t', names=[str(i) + '_FS1' for i in range(1, 601)], dtype=float)
+PS2 = pd.read_csv('data/PS2.txt', sep='\t', names=[str(i) + '_PS2' for i in range(1, 6001)], dtype=float)
+X = pd.concat([FS1, PS2], axis=1)
 
-# Data preprocessing
-# Reduce time resolution of X(PS2)
-def reduce_time_resolution(df, stride):
-    if stride == 1:
-        return df
-    
-    df_reduced = []
-    for i in range(0, df.shape[1], stride):
-        avg_cols = df.iloc[:, i:i+stride].mean(axis=1)
-        avg_cols.name = df.iloc[:, i].name
-        df_reduced.append(avg_cols)
+# Data preprocessing + model pipeline
+NCOLS_PS2 = 6000    # number of columns in PS2
+STRIDE = 500        # coef of time resolution reduction
 
-    df_reduced = pd.concat(df_reduced, axis=1)
-
-    return df_reduced
-
-X = reduce_time_resolution(X, stride=500)
+# Pipeline
+pipe = make_pipeline(
+    extract_PS2(ncols=NCOLS_PS2), 
+    reduce_time_resolution(stride=STRIDE), 
+    LogisticRegression(random_state=0, max_iter=300))
 
 # Train and evaluate LR model
 print('Training model')
 # TODO: CV hyperparameter tuning
 scores = cross_validate(
-    LogisticRegression(random_state=0, max_iter=300), 
+    pipe, 
     X, 
     y, 
     cv=StratifiedKFold(n_splits=5, shuffle=True, random_state=1), 
@@ -69,7 +65,7 @@ if (scores.mean() < perf_threshold).any():
     raise ModelPerformanceError('accuracy', scores.mean().min(), perf_threshold)
 
 # Train the model
-clf = LogisticRegression(random_state=0, max_iter=300).fit(X, y)
+clf = pipe.fit(X, y)
 
 # Save trained model
 print('Saving model')
