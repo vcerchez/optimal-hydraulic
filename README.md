@@ -63,3 +63,31 @@ Le dossier contient uniquement les 3 fichiers suivants, chaque ligne représenta
 *  Containeriser votre code pour qu'il être exécuté facilement par un tiers.
 *  Mettre en place une application web qui donne la prédiction pour un numéro de cycle donné en 
 entrée.
+
+# How to use it
+
+For a quick demonstration one can pull a Docker image containing a pretrained model from the
+[vcerchez/optimal-hydraulic](https://hub.docker.com/repository/docker/vcerchez/optimal-hydraulic/tags) 
+repo.
+
+The model run in the contaner can be queried through its API with its entry point at 
+[localhost:8000/](http://localhost:8000/). For the API documentation, check 
+[localhost:8000/docs](http://localhost:8000/docs).
+
+# Contents of the repository
+
+```
+├── Dockerfile              : image for the containerized ML model
+├── LICENSE
+├── README.md
+├── data
+│   ├── data.7z             : archive with raw data
+├── data_preparation.py     : 
+├── eda.ipynb               : inital exoloratory data analysis
+├── environment.yml         : projects conda environment
+├── main.py                 : FastAPI app serving pretrained ML model
+├── model.ipynb             : creation and and optimization of the ML model
+├── model_examination.ipynb : ML model examination (to be removed)
+├── requirements.txt        : requirements for the containerized ML model
+└── train_model.py          : model training and pickling from the raw data
+```
