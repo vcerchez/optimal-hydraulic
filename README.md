@@ -77,16 +77,20 @@ The model run in the contaner can be queried through its API with its entry poin
 # Contents of the repository
 
 ```
-├── Dockerfile              : image for the containerized ML model
+├── Dockerfile              : create image with the containerized ML model
 ├── LICENSE
 ├── README.md
 ├── data
-│   ├── data.7z             : archive with raw data
-├── data_preparation.py     : 
+│   │
+│   └── data.7z             : archive with raw data
+├── data_preparation.py     : data preparation for the model.ipynb notebook
+├── data_transformation.py  : data preparation as sklearn transformers
 ├── eda.ipynb               : inital exoloratory data analysis
-├── environment.yml         : projects conda environment
+├── environment.yml         : project's conda environment
 ├── main.py                 : FastAPI app serving pretrained ML model
 ├── model.ipynb             : creation and and optimization of the ML model
 ├── requirements.txt        : requirements for the containerized ML model
+├── test_api.ipynb          : notebook for testing API in container
+├── test_app.py             : tests
 └── train_model.py          : model training and pickling from the raw data
 ```
