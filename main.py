@@ -1,7 +1,8 @@
 # REST API to serve ML model
 
+import numpy as np
 import pandas as pd
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
 from pydantic import BaseModel
 import joblib
 from fastapi import FastAPI
@@ -33,3 +34,20 @@ def predict_on_idx(idx: int):
     """    
     prediction = model.predict(X.iloc[[idx], :])
     return prediction.item()
+
+class DataVector(BaseModel):
+    vector: list[float]
+
+@app.post("/predict_on_x")
+def predict_on_x(X: DataVector = Body(...)):
+    """Predict the target (valve condition) given the feature vector.
+
+    Args:
+        X (list): list of feature values.
+
+    Returns:
+        _type_: predicted valve conditon.
+    """
+    df = pd.DataFrame(X.vector).T
+    y_hat = model.predict(df).item()
+    return {'y_hat': y_hat}

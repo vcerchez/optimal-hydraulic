@@ -13,6 +13,7 @@ dependencies:
   - fastapi=0.111.*
   - uvicorn=0.29.*
   - pytest=8.2.*
+  - httpx=0.27.*
 
 ####### USAGE #########
 # Install env with:
