@@ -21,8 +21,8 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.post("/classify")
-def classify(idx: int):
+@app.post("/predict_on_idx")
+def predict_on_idx(idx: int):
     """Predict the target (valve condition) given the index of an example in the dataset.
 
     Args:
