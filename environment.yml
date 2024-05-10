@@ -12,6 +12,7 @@ dependencies:
   - scikit-learn=1.4.*
   - fastapi=0.111.*
   - uvicorn=0.29.*
+  - pytest=8.2.*
 
 ####### USAGE #########
 # Install env with:
