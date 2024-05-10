@@ -87,7 +87,6 @@ The model run in the contaner can be queried through its API with its entry poin
 ├── environment.yml         : projects conda environment
 ├── main.py                 : FastAPI app serving pretrained ML model
 ├── model.ipynb             : creation and and optimization of the ML model
-├── model_examination.ipynb : ML model examination (to be removed)
 ├── requirements.txt        : requirements for the containerized ML model
 └── train_model.py          : model training and pickling from the raw data
 ```
