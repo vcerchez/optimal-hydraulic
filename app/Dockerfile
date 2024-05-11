@@ -25,7 +25,7 @@ COPY requirements.txt main.py model.joblib /app/
 
 RUN mkdir data
 
-COPY /data/X.csv /data/y.csv /app/data/
+COPY X.csv y.csv /app/data/
 
 # Expose the port that the application listens on.
 EXPOSE 8000

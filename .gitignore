@@ -161,4 +161,5 @@ cython_debug/
 
 data/*.txt
 data/*.csv
+app/*.csv
 *.joblib

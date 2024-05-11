@@ -13,8 +13,8 @@ app = FastAPI()
 model = joblib.load("model.joblib")
 
 # Load data
-y = pd.read_csv('data/y.csv').iloc[:, 0]
-X = pd.read_csv('data/X.csv')
+y = pd.read_csv('../data/y.csv').iloc[:, 0]
+X = pd.read_csv('../data/X.csv')
 
 
 @app.get("/")

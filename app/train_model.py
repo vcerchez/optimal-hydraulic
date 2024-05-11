@@ -16,7 +16,7 @@ print('Loading and preprocessing data')
 # Target variable
 target_col_idx = 1
 y_raw = pd.read_csv(
-    'data/profile.txt', 
+    '../data/profile.txt', 
     sep='\t', 
     usecols=[target_col_idx],
     names=['valve condition'],  
@@ -27,8 +27,8 @@ y = (y_raw - 99).clip(lower=0)
 
 # Explanatory variables
 # We ignore FS1, perfect model can be trained with PS2 only.
-FS1 = pd.read_csv('data/FS1.txt', sep='\t', names=[str(i) + '_FS1' for i in range(1, 601)], dtype=float)
-PS2 = pd.read_csv('data/PS2.txt', sep='\t', names=[str(i) + '_PS2' for i in range(1, 6001)], dtype=float)
+FS1 = pd.read_csv('../data/FS1.txt', sep='\t', names=[str(i) + '_FS1' for i in range(1, 601)], dtype=float)
+PS2 = pd.read_csv('../data/PS2.txt', sep='\t', names=[str(i) + '_PS2' for i in range(1, 6001)], dtype=float)
 X = pd.concat([FS1, PS2], axis=1)
 
 # Data preprocessing + model pipeline
@@ -74,7 +74,7 @@ joblib.dump(clf, 'model.joblib')
 
 # Save preprocessed data
 print('Saving preprocessed data')
-y.to_csv('data/y.csv', index=False)
-X.to_csv('data/X.csv', index=False)
+y.to_csv('y.csv', index=False)
+X.to_csv('X.csv', index=False)
 
 print('Done')
