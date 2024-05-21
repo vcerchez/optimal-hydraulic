@@ -17,6 +17,10 @@ se trouve à [localhost:8000/](http://localhost:8000/). Pour la documentation de
 
 # Données
 
+Les données sont liées à la publication suivante : [Condition monitoring of a complex hydraulic system using multivariate statistics](https://ieeexplore.ieee.org/document/7151267), DOI : 10.1109/I2MTC.2015.7151267
+
+Extraits des figures : https://www.semanticscholar.org/paper/Condition-monitoring-of-a-complex-hydraulic-system-Helwig-Pignanelli/8f665bb769f7d76f9f44069a86f86821e63b33de
+
 Les données sont disponibles dans le dossier **/data**. Les données sont décrites dans le lien 
 suivant : https://archive.ics.uci.edu/dataset/447/condition+monitoring+of+hydraulic+systems.
 
