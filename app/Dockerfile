@@ -21,7 +21,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     python -m pip install -r requirements.txt
 
 # Copy the source code into the container.
-COPY requirements.txt main.py model.joblib /app/
+COPY requirements.txt main.py data_transformation.py model.joblib /app/
 
 RUN mkdir data
 
