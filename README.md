@@ -105,3 +105,31 @@ entrée.
 │   └── model.ipynb             : development and and optimization of the ML model
 └── environment.yml             : conda environment
 ```
+
+# Docker memo
+
+Build image with
+
+```bash
+docker build --tag vcerchez/optimal-hydraulic .
+```
+
+Push to DockerHub:
+
+Login first with
+
+```bash
+docker login -u YOUR-USER-NAME
+```
+
+then push
+
+```bash
+docker push vcerchez/optimal-hydraulic
+```
+
+Run image with
+
+```bash
+docker run -p 8000:8000 vcerchez/optimal-hydraulic
+```
